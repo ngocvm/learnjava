@@ -1,8 +1,6 @@
 package com.ngocvm.example.all.jackson;
 
-import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.module.SimpleModule;
 
 public class JacksonTest {
     public static void main(String[] args) {
