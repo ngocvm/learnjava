@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="bookTitle" class="com.ngocvm.example.spring.ch1.book.data.Title">
+        <property name="titleValue">
+            <value>My First Spring Book</value>
+        </property>
+    </bean>
+
+    <bean id="chapter1Title" class="com.ngocvm.example.spring.ch1.book.data.Title">
+        <constructor-arg>
+            <value>Spring framework - Chapter 1</value>
+        </constructor-arg>
+    </bean>
+
+    <bean id="chapter2Title" class="com.ngocvm.example.spring.ch1.book.data.Title">
+        <constructor-arg>
+            <value>Spring framework - Chapter 2</value>
+        </constructor-arg>
+    </bean>
+
+    <bean id="chapter3Title" class="com.ngocvm.example.spring.ch1.book.data.Title">
+        <property name="titleValue">
+            <value>Spring framework - Chapter 3</value>
+        </property>
+    </bean>
+
+    <bean id="chapter1" class="com.ngocvm.example.spring.ch1.book.data.Chapter">
+        <property name="number">
+            <value>1</value>
+        </property>
+        <property name="content">
+            <value>The content of chapter 1 goes here.</value>
+        </property>
+        <property name="title">
+            <ref bean="chapter1Title"/>
+        </property>
+    </bean>
+
+    <!-- injecting the dependencies of chapter 2 using constructor by index -->
+    <bean id="chapter2" class="com.ngocvm.example.spring.ch1.book.data.Chapter">
+        <constructor-arg index="0">
+            <value>2</value>
+        </constructor-arg>
+        <constructor-arg index="1">
+            <ref bean="chapter2Title"/>
+        </constructor-arg>
+        <constructor-arg index="2">
+            <value>The content of chapter 2 goes here.</value>
+        </constructor-arg>
+    </bean>
+
+    <!-- injecting the dependencies of chapter 3 using constructor by type -->
+    <bean id="chapter3" class="com.ngocvm.example.spring.ch1.book.data.Chapter">
+        <constructor-arg type="int">
+            <value>3</value>
+        </constructor-arg>
+        <constructor-arg type="com.ngocvm.example.spring.ch1.book.data.Title">
+            <ref bean="chapter3Title"/>
+        </constructor-arg>
+        <constructor-arg type="String">
+            <value>The content of chapter 3 goes here.</value>
+        </constructor-arg>
+    </bean>
+
+    <bean id="myFirstSpringBook" class="com.ngocvm.example.spring.ch1.book.data.Book">
+        <property name="isbn">
+            <value>1</value>
+        </property>
+        <property name="author">
+            <value>Mr. XYZ</value>
+        </property>
+        <property name="title">
+            <ref bean="bookTitle"/>
+        </property>
+        <property name="chapters">
+            <list>
+                <ref bean="chapter1"/>
+                <ref bean="chapter2"/>
+                <ref bean="chapter3"/>
+            </list>
+        </property>
+    </bean>
+</beans>
